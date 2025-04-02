@@ -1,6 +1,11 @@
 FROM logspace/langflow:latest
 
-# No need to set ENV PORT=$PORT as Railway will inject it
+# Skapa en startup-skript
+WORKDIR /app
+RUN echo '#!/bin/bash' > /app/start.sh && \
+    echo 'echo "PORT value: $PORT"' >> /app/start.sh && \
+    echo 'python -m langflow run --host 0.0.0.0 --port 8000' >> /app/start.sh && \
+    chmod +x /app/start.sh
 
-# Use shell form of CMD to ensure environment variable substitution works
-CMD python -m langflow run --host 0.0.0.0 --port ${PORT}
+# Använd startskriptet som entry point
+CMD ["/app/start.sh"]

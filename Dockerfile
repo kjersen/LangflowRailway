@@ -2,21 +2,16 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Installera nödvändiga paket
+# Installera systempaket
 RUN apt-get update && apt-get install -y \
-    build-essential \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
-# Kopiera och installera applikationen
-COPY . /app/
-RUN pip install --no-cache-dir -e ".[dev]"
+# Installera Langflow direkt från PyPI
+RUN pip install --no-cache-dir langflow
 
 # Exponera port
 EXPOSE 7860
 
-# Sätt miljövariabler
-ENV HOST=0.0.0.0
-ENV PORT=7860
-
 # Kör applikationen
-CMD ["python", "-m", "langflow", "run", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["langflow", "run", "--host", "0.0.0.0", "--port", "7860"]

@@ -1,7 +1,6 @@
 FROM logspace/langflow:latest
 
-# Exponera port
-EXPOSE 7860
+# No need to set ENV PORT=$PORT as Railway will inject it
 
-# Kör applikationen med ett shell-kommando så att miljövariabeln expanderas korrekt
-CMD langflow run --host 0.0.0.0 --port 7860
+# Use shell form of CMD to ensure environment variable substitution works
+CMD python -m langflow run --host 0.0.0.0 --port ${PORT}

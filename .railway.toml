@@ -5,6 +5,3 @@ builder = "dockerfile"
 healthcheck_path = "/"
 healthcheck_timeout_sec = 300
 restarts = 5
-
-[variables]
-PORT = "7860"

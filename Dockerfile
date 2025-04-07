@@ -1,7 +1,7 @@
-FROM python:3.9-slim
+FROM python:3.10-slim
 
-# Installera Langflow version 1.3.2 från den officiella källan
-RUN pip install langflow==1.3.2
+# Installera Langflow version 1.3.2
+RUN pip install --upgrade pip && pip install langflow==1.3.2
 
 # Skapa en databasdirektorie och ge skrivrättigheter
 RUN mkdir -p /data && chmod 777 /data
